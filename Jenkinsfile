@@ -11,9 +11,9 @@ pipeline {
             }
         stage('build') {
             steps {
-                	{
+                	
       				sh "mvn -f static-code-analysis-example/pom.xml clean package checkstyle:checkstyle findbugs:findbugs cobertura:cobertura pmd:pmd"
-      			}
+      			
             }
         }
         stage('Analysis') {
