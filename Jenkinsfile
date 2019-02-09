@@ -15,10 +15,10 @@ pipeline {
             	script {
 	            	mvnHome = tool 'M3'
 	                if (isUnix()) {
-	         			sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore clean package"
+	         			sh "'${mvnHome}/bin/mvn' -f static-code-analysis-example/pom.xml clean package checkstyle:checkstyle findbugs:findbugs cobertura:cobertura pmd:pmd"
 	      			} 
 	      			else {
-	        			 bat(/"${mvnHome}\bin\mvn" -Dmaven.test.failure.ignore clean package/)
+	        			 bat(/"${mvnHome}\bin\mvn" -f static-code-analysis-example/pom.xml clean package checkstyle:checkstyle findbugs:findbugs cobertura:cobertura pmd:pmd/)
 	        		}
       			}
             }
