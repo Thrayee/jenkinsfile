@@ -18,9 +18,7 @@ pipeline {
 	         			sh "'${mvnHome}/bin/mvn' -f static-code-analysis-example/pom.xml clean package checkstyle:checkstyle findbugs:findbugs cobertura:cobertura pmd:pmd"
 	      			} 
 	      			else {
-
-	      				 bat(/cd static-code-analysis-example/)
-	        			 bat(/"${mvnHome}\bin\mvn" clean package checkstyle:checkstyle findbugs:findbugs cobertura:cobertura pmd:pmd/)
+	        			 bat(/"${mvnHome}\bin\mvn" -f static-code-analysis-example/pom.xml clean package checkstyle:checkstyle findbugs:findbugs cobertura:cobertura pmd:pmd/)
 	        		}
       			}
             }
