@@ -2,18 +2,22 @@
 pipeline {
     
     agent { label 'master' } 
-
+    
     stages {
         stage('Make rsa') {
             steps {
                 git 'https://github.com/Thrayee/jenkinsfile.git'
+                mvnHome = tool 'M3'
                 }
             }
         stage('build') {
             steps {
-                	
-      				sh "mvn -f static-code-analysis-example/pom.xml clean package checkstyle:checkstyle findbugs:findbugs cobertura:cobertura pmd:pmd"
-      			
+                if (isUnix()) {
+         			sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore clean package"
+      			} 
+      			else {
+        			 bat(/"${mvnHome}\bin\mvn" -Dmaven.test.failure.ignore clean package/)
+      			}
             }
         }
         stage('Analysis') {
