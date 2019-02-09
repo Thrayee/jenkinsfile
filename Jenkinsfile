@@ -11,9 +11,7 @@ pipeline {
             }
         stage('build') {
             steps {
-                withMaven(
-            		maven: 'M3', 
-            		mavenSettingsConfig: 'maven') {
+                	{
       				sh "mvn -f static-code-analysis-example/pom.xml clean package checkstyle:checkstyle findbugs:findbugs cobertura:cobertura pmd:pmd"
       			}
             }
